@@ -3,15 +3,15 @@
 using namespace std;
 
 struct Elem {
-    Elem* next;
+    Elem *next;
     int val;
 
     explicit Elem(int val0) : val(val0), next(nullptr) {}
 };
 
 struct myqueue {
-    Elem* first;
-    Elem* last;
+    Elem *first;
+    Elem *last;
 
     myqueue() : first(nullptr), last(nullptr) {}
 
@@ -20,8 +20,8 @@ struct myqueue {
     }
 
     void push_back(int pval) {
-        Elem* n = new Elem(pval);
-        if(is_empty()) {
+        Elem *n = new Elem(pval);
+        if (is_empty()) {
             first = n;
             last = n;
             return;
@@ -32,7 +32,7 @@ struct myqueue {
     }
 
     int pop_front() {
-        Elem* n = first;
+        Elem *n = first;
         first = n->next;
 
         int ans = n->val;
@@ -49,17 +49,17 @@ int main() {
 
     int n;
     myqueue q;
-    cin>>n;
+    cin >> n;
 
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         char sign;
         int k;
 
-        cin>>sign;
-        if(sign == '-') {
-            cout<<q.pop_front()<<'\n';
+        cin >> sign;
+        if (sign == '-') {
+            cout << q.pop_front() << '\n';
         } else {
-            cin>>k;
+            cin >> k;
             q.push_back(k);
         }
     }

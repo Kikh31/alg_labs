@@ -9,4 +9,8 @@ add_executable(J lab2/J.cpp)
 add_executable(E lab2/E.cpp)
 add_executable(K lab2/K.cpp)
 
+add_executable(A lab3/A.cpp)
+add_executable(B lab3/B.cpp)
+add_executable(F lab3/F.cpp)
+
 add_executable(test other_code/test.cpp)

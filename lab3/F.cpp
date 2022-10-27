@@ -10,10 +10,10 @@ int left_binSearch(int *arr, int size, int key) {
     while (l < r - 1) {
         int mid = (l + r) / 2;
 
-        if(arr[mid] < key) l = mid;
+        if (arr[mid] < key) l = mid;
         else r = mid;
     }
-    if(arr[r]==key) return r+1;
+    if (arr[r] == key) return r + 1;
     else return -1;
 }
 
@@ -24,10 +24,10 @@ int right_binSearch(int *arr, int size, int key) {
     while (l < r - 1) {
         int mid = (l + r) / 2;
 
-        if(arr[mid] <= key) l = mid;
+        if (arr[mid] <= key) l = mid;
         else r = mid;
     }
-    if(arr[l]==key) return l+1;
+    if (arr[l] == key) return l + 1;
     else return -1;
 }
 
