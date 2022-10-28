@@ -3,50 +3,52 @@
 using namespace std;
 
 struct Elem {
-    Elem *next;
+    Elem *prev;
     int val;
 
-    explicit Elem(int val0) : val(val0), next(nullptr) {}
+    explicit Elem(int val0) : val(val0), prev(nullptr) {}
 };
 
-struct myqueue {
-    Elem *first;
+struct mystack {
     Elem *last;
-
-    myqueue() : first(nullptr), last(nullptr) {}
+    int st_max;
+    mystack() : last(nullptr), st_max(INT_MAX) {}
 
     bool is_empty() {
-        return first == nullptr;
+        return last == nullptr;
     }
 
-    void push_back(int pval) {
+    int get_max() {
+        return st_max;
+    }
+
+    void push(int pval) {
         Elem *n = new Elem(pval);
+
         if (is_empty()) {
-            first = n;
             last = n;
             return;
         } else {
-            last->next = n;
+            n->prev = last;
             last = n;
         }
     }
 
-    int pop_front() {
-        Elem *n = first;
-        first = n->next;
+    int pop() {
+        Elem *n = last;
+        last = n->prev;
 
         int ans = n->val;
         delete n;
 
         return ans;
     }
-
 };
 
 int main() {
     int n;
     vector<int> res;
-    myqueue q;
+    mystack s;
     cin >> n;
 
     for (int i = 0; i < n; i++) {
@@ -55,12 +57,10 @@ int main() {
 
         cin >> sign;
         if (sign == '-') {
-            res.push_back(q.pop_front());
+            res.push_back(s.pop());
         } else {
             cin >> k;
-            q.push_back(k);
+            s.push(k);
         }
     }
-
-    for (auto x: res) cout << x << '\n';
 }

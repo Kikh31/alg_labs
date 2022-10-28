@@ -41,23 +41,28 @@ struct mystack {
 };
 
 int main() {
-    int n;
-    vector<int> res;
-    mystack s;
-    cin >> n;
+    string c;
+    mystack st;
 
-    for (int i = 0; i < n; i++) {
-        char sign;
-        int k;
+    getline(cin, c);
 
-        cin >> sign;
-        if (sign == '-') {
-            res.push_back(s.pop());
+    for (int i = 0; i < c.size(); i++) {
+        if (c[i] == ' ') continue;
+
+        if (c[i] == '+') {
+            int res = st.pop() + st.pop();
+            st.push(res);
+        } else if (c[i] == '-') {
+            int r2 = st.pop(), r1 = st.pop();
+            int res = r1 - r2;
+            st.push(res);
+        } else if (c[i] == '*') {
+            int res = st.pop() * st.pop();
+            st.push(res);
         } else {
-            cin >> k;
-            s.push(k);
+            st.push(c[i] - '0');
         }
     }
 
-    for (auto x: res) cout << x << '\n';
+    cout << st.pop();
 }
