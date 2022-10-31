@@ -40,7 +40,7 @@ struct mystack {
     }
 
     char check_last() {
-        if(is_empty()) return 'n';
+        if (is_empty()) return 'n';
         else return last->val;
     }
 
@@ -57,19 +57,19 @@ int main() {
 
         bool f = true;
 
-        for(int i = 0; i < c.size(); i++) {
-            if(c[i] == '(' || c[i] == '[') st.push(c[i]);
+        for (int i = 0; i < c.size(); i++) {
+            if (c[i] == '(' || c[i] == '[') st.push(c[i]);
             else {
                 if (st.check_last() == '(' && c[i] == ')') st.pop();
-                else if(st.check_last() == '[' && c[i] == ']') st.pop();
+                else if (st.check_last() == '[' && c[i] == ']') st.pop();
                 else {
                     f = false;
                     break;
                 }
             }
         }
-        if(f && st.is_empty()) cout<<"YES"<<'\n';
-        else cout<<"NO"<<'\n';
+        if (f && st.is_empty()) cout << "YES" << '\n';
+        else cout << "NO" << '\n';
         st.clear();
     }
 }

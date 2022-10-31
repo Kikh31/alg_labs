@@ -4,63 +4,69 @@ using namespace std;
 
 struct Elem {
     Elem *prev;
-    int val;
+    long long st_max;
+    long long val;
 
-    explicit Elem(int val0) : val(val0), prev(nullptr) {}
+    explicit Elem(long long val0) : val(val0), prev(nullptr), st_max(0) {}
 };
 
 struct mystack {
     Elem *last;
-    int st_max;
-    mystack() : last(nullptr), st_max(INT_MAX) {}
+
+    mystack() : last(nullptr) {}
 
     bool is_empty() {
         return last == nullptr;
     }
 
-    int get_max() {
-        return st_max;
+    long long get_max() {
+        if (is_empty()) return -1;
+        else return last->st_max;
     }
 
-    void push(int pval) {
+    void push(long long pval) {
         Elem *n = new Elem(pval);
-
         if (is_empty()) {
+            n->st_max = pval;
             last = n;
             return;
-        } else {
-            n->prev = last;
-            last = n;
         }
+        n->prev = last;
+        n->st_max = max(last->st_max, pval);
+        last = n;
     }
 
-    int pop() {
+    long long pop() {
         Elem *n = last;
         last = n->prev;
 
-        int ans = n->val;
+        long long ans = n->val;
         delete n;
-
         return ans;
     }
 };
 
 int main() {
+    std::ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
     int n;
-    vector<int> res;
     mystack s;
     cin >> n;
 
     for (int i = 0; i < n; i++) {
         char sign;
-        int k;
+        long long k;
 
         cin >> sign;
         if (sign == '-') {
-            res.push_back(s.pop());
-        } else {
+            s.pop();
+        } else if (sign == '+') {
             cin >> k;
             s.push(k);
+        } else {
+            cout << s.get_max() << '\n';
+            cin.get();
+            cin.get();
         }
     }
 }
