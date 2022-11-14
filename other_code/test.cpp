@@ -1,27 +1,36 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 int main() {
-    int a[] = {1, 2, 3, 9, 12},
-            b[] = {6, 10};
+    int s, n;
+    cin>>s>>n;
+    vector< pair<int, int> > v;
 
-    int a_size = sizeof(a) / sizeof(int),
-            b_size = sizeof(b) / sizeof(int),
-            i = 0, j = 0, r1, r2, _min = INT_MAX;
-
-    while (i < a_size && j < b_size) {
-        if (abs(a[i] - b[j]) < _min) {
-            _min = abs(a[i] - b[j]);
-            r1 = min(a[i], b[j]);
-            r2 = max(a[i], b[j]);
-        }
-
-        if (_min == 0) break;
-
-        if (a[i] < b[j]) i++;
-        else j++;
+    for (int i = 0; i < n; i++) {
+        int x, y;
+        cin >> x >> y;
+        v.push_back( {x, y} );
     }
 
-    cout << r1 << " " << r2;
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j > 0 && v[j - 1].second < v[j].second; j--) {
+            swap(v[j - 1], v[j]);
+        }
+    }
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j > 0 && v[j - 1].first > v[j].first; j--) {
+            swap(v[j - 1], v[j]);
+        }
+    }
+
+    for (auto x : v) {
+        if(s <= x.first) {
+            cout<<"NO";
+            return 0;
+        }
+        s+=x.second;
+    }
+    cout<<"YES";
 }

@@ -1,4 +1,5 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -59,5 +60,5 @@ int main() {
         }
     }
 
-    for (auto x: res) cout << x << '\n';
+    for (auto x : res) cout << x << '\n';
 }
