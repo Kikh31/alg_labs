@@ -21,6 +21,12 @@ add_executable(B4 lab4/B.cpp)
 add_executable(C4 lab4/C.cpp)
 add_executable(D4 lab4/D.cpp)
 
+add_executable(A5 lab5/A.cpp)
+add_executable(B5 lab5/B.cpp)
+add_executable(C5 lab5/C.cpp)
+add_executable(D5 lab5/D.cpp)
+add_executable(E5 lab5/E.cpp)
+add_executable(F5 lab5/F.cpp)
 
 add_executable(test other_code/test.cpp)
 
