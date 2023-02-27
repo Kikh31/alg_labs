@@ -37,5 +37,8 @@ int main() {
         arr[i] = node;
     }
 
-    cout << get_height(arr, 0, 0);
+    for(int i = 0; i<n; i++) {
+        cout << get_height(arr, i, 0);
+    }
+
 }
