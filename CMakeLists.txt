@@ -32,6 +32,7 @@ add_executable(A6 lab6/A.cpp)
 add_executable(B6 lab6/B.cpp)
 
 add_executable(B7 lab7/B.cpp)
+add_executable(C7 lab7/C.cpp)
 
 add_executable(test other_code/test.cpp)
 

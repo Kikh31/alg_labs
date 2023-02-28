@@ -1,9 +1,9 @@
-#include <bits/stdc++.h>
+#include <iostream>
 
 using namespace std;
 
 int res;
-pair<char, int> cur = {' ', 0};
+pair<char, int> cur(' ', 0);
 
 int comp(string s1, string s2) {
     char c1 = s1[0];

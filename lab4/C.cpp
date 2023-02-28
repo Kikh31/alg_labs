@@ -1,9 +1,10 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
 struct priorityQueue {
-    vector<pair<int, int>> vec;
+    vector< pair<int, int> > vec;
     int oper = 0;
 
     void siftDown(int n, int i) {
@@ -27,7 +28,7 @@ struct priorityQueue {
     }
 
     void push(int val) {
-        vec.push_back({val, ++oper});
+        vec.push_back( make_pair(val, ++oper) );
         int n = vec.size() - 1;
         siftUp(n);
     }
