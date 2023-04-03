@@ -1,36 +1,52 @@
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
+#define n 2
+
 int main() {
-    int s, n;
-    cin>>s>>n;
-    vector< pair<int, int> > v;
+    int matA[n][n], matB[n][n], resm1[n][n], resm2[n][n];
 
-    for (int i = 0; i < n; i++) {
-        int x, y;
-        cin >> x >> y;
-        v.push_back( {x, y} );
-    }
-
-    for (int i = 1; i < n; i++) {
-        for (int j = i; j > 0 && v[j - 1].second < v[j].second; j--) {
-            swap(v[j - 1], v[j]);
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cin>>matA[i][j];
         }
     }
-    for (int i = 1; i < n; i++) {
-        for (int j = i; j > 0 && v[j - 1].first > v[j].first; j--) {
-            swap(v[j - 1], v[j]);
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cin>>matB[i][j];
+        }
+    }
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            resm1[i][j] = matB[i][j] - matA[i][j];
         }
     }
 
-    for (auto x : v) {
-        if(s <= x.first) {
-            cout<<"NO";
-            return 0;
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            resm2[i][j] = matB[i][j] + matA[i][j];
         }
-        s+=x.second;
     }
-    cout<<"YES";
+
+    for(int i = 0; i < n; i++) {
+        for(int j = i; j < n; j++) {
+            swap(resm2[i][j], resm2[j][i]);
+        }
+    }
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cout<<resm1[i][j]<<" ";
+        }
+        cout<<endl;
+    }
+
+    cout<<endl;
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cout<<resm2[i][j]<<" ";
+        }
+        cout<<endl;
+    }
 }
