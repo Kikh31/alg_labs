@@ -1,54 +1,88 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-int n, m;
+enum class Color {
+    White, Grey, Black
+};
 
-int BFS(vector<vector<int>> &graph, int source, int destination) {
-    int d[n + 1];
-    int parent[n + 1];
-    fill(d + 1, d + n + 1, INT_MAX);
-    fill(parent + 1, parent + n + 1, 0);
+int n, m, answer, dots;
 
-    d[source] = 0;
-    queue<int> queue;
-    queue.push(source);
+void Visit(vector<vector<int> > &graph, Color *color, int u) {
+    color[u] = Color::Grey;
+    for (auto v: graph[u]) {
+        if (color[v] == Color::White) {
+            Visit(graph, color, v);
+        }
+    }
+    color[u] = Color::Black;
+}
 
-    while (!queue.empty()) {
-        int u = queue.front();
-        queue.pop();
-        for (int i = 1; i <= n; i++) {
-            for (auto v: graph[u]) {
-                if (d[v] == INT_MAX) {
-                    d[v] = d[u] + 1;
-                    parent[v] = u;
-                    queue.push(v);
-                }
+void DFS(vector<vector<int> > &graph, Color *color) {
+    for (int i = 1; i <= dots; i++) {
+        color[i] = Color::White;
+    }
+
+    for (int i = 1; i <= dots; i++) {
+        if (color[i] == Color::White) {
+            answer++;
+            Visit(graph, color, i);
+        }
+    }
+}
+
+int dotCount(string **flat) {
+    int res = 0;
+
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (flat[i][j] == ".") {
+                flat[i][j] = to_string(++res);
             }
         }
     }
-    return d[destination];
+
+    return res;
+}
+
+void mkGraph(string **flat, vector<vector<int> > &graph, Color *color) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (flat[i][j] != "#") {
+                if (flat[i - 1][j] != "#") graph[ stoi(flat[i][j]) ].push_back( stoi(flat[i - 1][j]) );
+                if (flat[i][j - 1] != "#") graph[ stoi(flat[i][j]) ].push_back( stoi(flat[i][j - 1]) );
+                if (flat[i][j + 1] != "#") graph[ stoi(flat[i][j]) ].push_back( stoi(flat[i][j + 1]) );
+                if (flat[i + 1][j] != "#") graph[ stoi(flat[i][j]) ].push_back( stoi(flat[i + 1][j]) );
+            }
+        }
+    }
 }
 
 int main() {
     cin >> n >> m;
 
-    vector<vector<int>> graph(n + 1);
-
-    for (int i = 0; i < m; i++) {
-        int x, y;
-        cin >> x >> y;
-        graph[x].push_back(y);
-        graph[y].push_back(x);
+    string **flat = new string *[n];
+    for (int i = 0; i < n; i++) {
+        flat[i] = new string[m];
     }
 
-    int s, f;
-    cin >> s >> f;
-
-    int res = BFS(graph, s, f);
-    if (res == INT_MAX) {
-        cout << -1;
-    } else {
-        cout << res;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            char x;
+            cin >> x;
+            flat[i][j] += x;
+        }
     }
+
+    dots = dotCount(flat);
+    vector<vector<int> > graph(dots + 1);
+    Color color[dots + 1];
+
+    mkGraph(flat, graph, color);
+
+    DFS(graph, color);
+
+    cout << answer << '\n';
 }

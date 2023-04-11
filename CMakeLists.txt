@@ -39,6 +39,12 @@ add_executable(B8 lab8/B.cpp)
 add_executable(C8 lab8/C.cpp)
 add_executable(F8 lab8/F.cpp)
 
+add_executable(A9 lab9/A.cpp)
+add_executable(B9 lab9/B.cpp)
+add_executable(C9 lab9/C.cpp)
+add_executable(D9 lab9/D.cpp)
+
+
 add_executable(test other_code/test.cpp)
 
 
