@@ -47,6 +47,9 @@ add_executable(D9 lab9/D.cpp)
 add_executable(A10 lab10/A.cpp)
 add_executable(B10 lab10/B.cpp)
 
+add_executable(C12 lab12/C.cpp)
+add_executable(E12 lab12/E.cpp)
+
 
 add_executable(test other_code/test.cpp)
 
