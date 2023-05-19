@@ -57,6 +57,8 @@ add_executable(C11 lab11/C.cpp)
 add_executable(E11 lab11/E.cpp)
 add_executable(F11 lab11/F.cpp)
 
+
+add_executable(A12 lab12/A.cpp)
 add_executable(C12 lab12/C.cpp)
 add_executable(E12 lab12/E.cpp)
 
